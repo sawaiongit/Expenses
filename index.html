@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Track your income, pocket money, expenses, remaining balance, and savings with a simple personal expense tracker.">
+
+    <meta name="theme-color" content="#101827">
+
+    <title>PennyWise | Personal Expense Tracker</title>
+
+    <!-- External font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Our separate CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Our separate JavaScript file -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ==============================
+         MOBILE HEADER
+    =============================== -->
+    <header class="mobile-header">
+        <a href="#dashboard" class="brand">
+            <span class="brand-icon">
+                <i class="fa-solid fa-wallet"></i>
+            </span>
+            <span>PennyWise</span>
+        </a>
+
+        <button class="icon-button" id="mobile-menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="sidebar">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+
+    <!-- ==============================
+         APP LAYOUT
+    =============================== -->
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand">
+                <a href="#dashboard" class="brand">
+                    <span class="brand-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </span>
+                    <span>PennyWise</span>
+                </a>
+
+                <p class="brand-subtitle">
+                    Your money. Your control.
+                </p>
+            </div>
+
+            <!-- Main navigation -->
+            <nav class="main-navigation"
+                aria-label="Main navigation">
+
+                <p class="nav-heading">WORKSPACE</p>
+
+                <a href="#dashboard"
+                    class="nav-link active"
+                    data-section="dashboard"
+                    aria-current="page">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#transactions"
+                    class="nav-link"
+                    data-section="transactions">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="#budgets"
+                    class="nav-link"
+                    data-section="budgets">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <span>Budgets</span>
+                </a>
+
+                <a href="#savings"
+                    class="nav-link"
+                    data-section="savings">
+                    <i class="fa-solid fa-piggy-bank"></i>
+                    <span>Savings Goals</span>
+                </a>
+
+                <p class="nav-heading">PREFERENCES</p>
+
+                <a href="#settings"
+                    class="nav-link"
+                    data-section="settings">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <!-- Sidebar tip -->
+            <div class="sidebar-tip">
+                <div class="tip-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+
+                <h3>Money tip</h3>
+
+                <p>
+                    Small savings today can help you reach
+                    bigger goals tomorrow.
+                </p>
+            </div>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                <span>Your personal finance space</span>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content" id="main-content">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+
+                <div class="breadcrumb">
+                    <span>Workspace</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <strong id="breadcrumb-title">Dashboard</strong>
+                </div>
+
+                <div class="topbar-actions">
+
+                    <div class="date-display">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span id="current-date">Loading date...</span>
+                    </div>
+
+                    <button class="profile-button"
+                        id="profile-button"
+                        aria-label="Open profile settings">
+                        <span class="profile-avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+
+                        <span class="profile-text">
+                            <strong id="profile-name">
+                                Welcome!
+                            </strong>
+                            <small id="profile-type">
+                                Personal account
+                            </small>
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- ==============================
+                 DASHBOARD SECTION
+            =============================== -->
+            <section class="page-section" id="dashboard">
+
+                <!-- Welcome heading -->
+                <div class="welcome-section">
+
+                    <div class="welcome-text">
+                        <p class="eyebrow">YOUR FINANCIAL OVERVIEW</p>
+
+                        <h1>
+                            Welcome back,
+                            <span id="welcome-name">there</span>!
+                        </h1>
+
+                        <p class="welcome-description">
+                            Keep track of your money, understand your
+                            spending, and make progress toward your goals.
+                        </p>
+                    </div>
+
+                    <button class="button button-primary"
+                        id="quick-add-expense">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Expense
+                    </button>
+
+                </div>
+
+
+                <!-- ==============================
+                     ACCOUNT TYPE SELECTOR
+                =============================== -->
+                <section class="setup-card"
+                    id="account-setup"
+                    aria-labelledby="setup-title">
+
+                    <div class="setup-heading">
+                        <div>
+                            <p class="eyebrow">LET'S GET STARTED</p>
+
+                            <h2 id="setup-title">
+                                Personalize your finances
+                            </h2>
+
+                            <p>
+                                Choose the option that best describes you.
+                            </p>
+                        </div>
+
+                        <span class="setup-icon">
+                            <i class="fa-solid fa-sliders"></i>
+                        </span>
+                    </div>
+
+
+                    <fieldset class="account-type-fieldset">
+
+                        <legend>
+                            How do you manage your money?
+                        </legend>
+
+                        <div class="account-type-options">
+
+                            <!-- Student option -->
+                            <label class="account-type-option selected"
+                                id="student-option">
+
+                                <input type="radio"
+                                    name="account-type"
+                                    value="student"
+                                    checked>
+
+                                <span class="account-option-icon student-icon">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </span>
+
+                                <span class="account-option-content">
+                                    <strong>I'm a Student</strong>
+
+                                    <small>
+                                        Pocket money, scholarships,
+                                        part-time income
+                                    </small>
+                                </span>
+
+                                <span class="option-check">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </span>
+
+                            </label>
+
+
+                            <!-- Working person option -->
+                            <label class="account-type-option"
+                                id="professional-option">
+
+                                <input type="radio"
+                                    name="account-type"
+                                    value="professional">
+
+                                <span class="account-option-icon professional-icon">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                </span>
+
+                                <span class="account-option-content">
+                                    <strong>I'm Working</strong>
+
+                                    <small>
+                                        Salary, freelance earnings,
+                                        business income
+                                    </small>
+                                </span>
+
+                                <span class="option-check">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </fieldset>
+
+
+                    <!-- Account setup form -->
+                    <form id="account-setup-form">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="user-name">
+                                    Your name
+                                </label>
+
+                                <input type="text"
+                                    id="user-name"
+                                    name="user-name"
+                                    placeholder="Enter your name"
+                                    maxlength="60"
+                                    autocomplete="given-name"
+                                    required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="currency">
+                                    Currency
+                                </label>
+
+                                <select id="currency" name="currency">
+                                    <option value="INR" selected>
+                                        INR — Indian Rupee (₹)
+                                    </option>
+
+                                    <option value="USD">
+                                        USD — US Dollar ($)
+                                    </option>
+
+                                    <option value="EUR">
+                                        EUR — Euro (€)
+                                    </option>
+
+                                    <option value="GBP">
+                                        GBP — British Pound (£)
+                                    </option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="income-label"
+                                    id="income-label-text">
+                                    Monthly pocket money
+                                </label>
+
+                                <div class="input-with-icon">
+                                    <span class="input-prefix"
+                                        id="income-currency-symbol">₹</span>
+
+                                    <input type="number"
+                                        id="income-amount"
+                                        name="income-amount"
+                                        placeholder="e.g. 5000"
+                                        min="0.01"
+                                        max="1000000000000"
+                                        step="0.01"
+                                        inputmode="decimal"
+                                        required>
+                                </div>
+
+                                <small class="field-help"
+                                    id="income-help">
+                                    Enter the total money you expect
+                                    to receive each month.
+                                </small>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="income-frequency">
+                                    Income frequency
+                                </label>
+
+                                <select id="income-frequency"
+                                    name="income-frequency">
+
+                                    <option value="monthly" selected>
+                                        Monthly
+                                    </option>
+
+                                    <option value="weekly">
+                                        Weekly
+                                    </option>
+
+                                    <option value="yearly">
+                                        Yearly
+                                    </option>
+
+                                </select>
+                            </div>
+
+
+                            <div class="form-group full-width">
+                                <label for="budget-period">
+                                    Tracking period
+                                </label>
+
+                                <select id="budget-period"
+                                    name="budget-period">
+
+                                    <option value="monthly" selected>
+                                        Monthly budget
+                                    </option>
+
+                                    <option value="weekly">
+                                        Weekly budget
+                                    </option>
+
+                                </select>
+
+                                <small class="field-help">
+                                    You can update your budget later.
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="setup-actions">
+
+                            <p>
+                                <i class="fa-solid fa-lock"></i>
+                                Your budget is personal to you.
+                            </p>
+
+                            <button type="submit"
+                                class="button button-primary">
+
+                                Create My Dashboard
+
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <!-- ==============================
+                     SUMMARY CARDS
+                =============================== -->
+                <section class="summary-section"
+                    aria-labelledby="summary-title">
+
+                    <div class="section-heading">
+                        <div>
+                            <h2 id="summary-title">
+                                Your money at a glance
+                            </h2>
+
+                            <p>
+                                A simple overview of your financial health.
+                            </p>
+                        </div>
+
+                        <div class="period-selector">
+                            <label for="summary-period"
+                                class="visually-hidden">
+                                Summary period
+                            </label>
+
+                            <select id="summary-period">
+                                <option value="this-month" selected>
+                                    This Month
+                                </option>
+
+                                <option value="last-month">
+                                    Last Month
+                                </option>
+
+                                <option value="all-time">
+                                    All Time
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="summary-grid">
+
+                        <!-- Total income -->
+                        <article class="summary-card income-card">
+
+                            <div class="summary-card-top">
+                                <span class="summary-icon income-summary-icon">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </span>
+
+                                <span class="summary-label">
+                                    Total Income
+                                </span>
+
+                                <button class="info-button"
+                                    type="button"
+                                    title="Income received during the selected period"
+                                    aria-label="About total income">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
+
+                            <p class="summary-amount"
+                                id="total-income">₹0.00</p>
+
+                            <p class="summary-note"
+                                id="income-summary-note">
+                                Your money received
+                            </p>
+
+                        </article>
+
+
+                        <!-- Total expenses -->
+                        <article class="summary-card expense-card">
+
+                            <div class="summary-card-top">
+                                <span class="summary-icon expense-summary-icon">
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                </span>
+
+                                <span class="summary-label">
+                                    Total Spent
+                                </span>
+
+                                <button class="info-button"
+                                    type="button"
+                                    title="Expenses recorded during the selected period"
+                                    aria-label="About total spending">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
+
+                            <p class="summary-amount"
+                                id="total-expenses">₹0.00</p>
+
+                            <p class="summary-note"
+                         
